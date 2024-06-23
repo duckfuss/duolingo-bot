@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.firefox.options import Options
 import time
@@ -73,9 +72,13 @@ class duoBot():
 
     def changeToFrench(self):
         time.sleep(5)
+        print("slept")
         self.browser.get("https://www.duolingo.com/courses/fr")
+        time.sleep(1)
         self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/a[1]")
+        time.sleep(1)
         self.browser.get("https://www.duolingo.com/practice-hub/stories")
+        print("french?")
 
     def changeToChinese(self):
         time.sleep(5)
