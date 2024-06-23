@@ -39,26 +39,18 @@ class duoBot():
         ]
     def xpathClick(self, path, click=True):
         btn = None
+        c = 0
         while not btn:
+            c+=1
             try:
                 btn = self.browser.find_element(By.XPATH, path)
             except NoSuchElementException:
                 time.sleep(0.1)
+                if c > 100:
+                    return btn
         if click:
             self.browser.execute_script("arguments[0].click();", btn)
         return btn
-    def login(self):
-        self.browser.get("https://www.duolingo.com/practice-hub/stories")
-        self.xpathClick('//*[@id="sign-in-btn"]')
-        usrnme = self.xpathClick('//*[@id="web-ui1"]', click=False)
-        pwd = self.xpathClick('//*[@id="web-ui2"]', click=False)
-        usrnme.send_keys("dtfussey@icloud.com")
-        pwd.send_keys("duolingoG0ldf!sh")
-        self.xpathClick("/html/body/div[2]/div[3]/div/div/form/div[1]/button")
-    def startCourse(self):
-        self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[1]/button")
-        self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/a")
-        self.xpathClick("/html/body/div[1]/div[1]/div/div/div/div[3]/button")
     def repContinuers(self, n, t=1):
         for i in range(n):
             time.sleep(t)
@@ -70,6 +62,31 @@ class duoBot():
                 self.xpathClick(i)
                 self.xpathClick(j)
 
+    def login(self):
+        self.browser.get("https://www.duolingo.com/practice-hub/stories") # the sole point of this url is to login reliably
+        self.xpathClick('//*[@id="sign-in-btn"]')
+        usrnme = self.xpathClick('//*[@id="web-ui1"]', click=False)
+        pwd = self.xpathClick('//*[@id="web-ui2"]', click=False)
+        usrnme.send_keys("dtfussey@icloud.com")
+        pwd.send_keys("duolingoG0ldf!sh")
+        self.xpathClick("/html/body/div[2]/div[3]/div/div/form/div[1]/button")
+
+    def changeToFrench(self):
+        time.sleep(5)
+        self.browser.get("https://www.duolingo.com/courses/fr")
+        self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/a[1]")
+        self.browser.get("https://www.duolingo.com/practice-hub/stories")
+
+    def changeToChinese(self):
+        time.sleep(5)
+        self.browser.get("https://www.duolingo.com/courses/en")
+        self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/a[8]")
+
+    def startCourse(self):
+        self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[1]/button")
+        self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/a")
+        self.xpathClick("/html/body/div[1]/div[1]/div/div/div/div[3]/button")
+
     def quiz(self):
         self.repContinuers(3)
         for i in ["q1:1", "q1:2", "q1:3"]:
@@ -80,18 +97,18 @@ class duoBot():
         self.repContinuers(5)
         self.xpathClick(self.cE["runs"])
         print("clicked runs")
-        self.repContinuers(10)
+        self.repContinuers(11)
         self.xpathClick(self.cE["hand"])
         self.repContinuers(4)
         for i in ["q3:1", "q3:2", "q3:3"]:
             self.xpathClick(self.cE[i])
         self.repContinuers(1)
         self.match()
-        self.repContinuers(5)
-        time.sleep(5)
-        self.xpathClick("/html/body/div[1]/div[1]/div/div/div[2]/div/div/div/button")
-        print("clicked?")
+        self.repContinuers(2)
+
 duck = duoBot()
 duck.login()
+duck.changeToFrench()
 duck.startCourse()
 duck.quiz()
+duck.changeToChinese()
