@@ -76,7 +76,7 @@ class duoBot():
         self.browser.get("https://www.duolingo.com/courses/fr")
         time.sleep(1)
         self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/a[1]")
-        time.sleep(10) # this needs to be long otherwise duo will load wrong lang without a stories section
+        time.sleep(5) # this needs to be long otherwise duo will load wrong lang without a stories section
         self.browser.get("https://www.duolingo.com/practice-hub/stories")
         print("french?")
 
