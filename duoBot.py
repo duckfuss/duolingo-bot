@@ -64,14 +64,16 @@ class duoBot():
                 self.xpathClick(j)
 
     def login(self):
+        username = input('what is your username? ')
+        password = input('what is your password? ')
         self.browser.get("https://www.duolingo.com/course/en/fr/Learn-English")
         time.sleep(5)
         self.xpathClick("/html/body/div[1]/div[1]/div/div[2]/div[2]/div/div[2]/button")
         usrnme = self.xpathClick('//*[@id="web-ui1"]', click=False)
         pwd = self.xpathClick('//*[@id="web-ui2"]', click=False)
-        usrnme.send_keys("dtfussey@icloud.com")
+        usrnme.send_keys(username)
         time.sleep(10)
-        pwd.send_keys("duolingoG0ldf!sh")
+        pwd.send_keys(password)
         time.sleep(5)
         for i in range(1):
             time.sleep(random.randrange(0,200)/100)
@@ -95,7 +97,8 @@ class duoBot():
     def startCourse(self):
         self.browser.get("https://www.duolingo.com/practice-hub/stories")
         time.sleep(10)
-        self.xpathClick("/html/body/div[1]/div[2]/div/div[3]/div/div[2]/a[1]")
+        self.xpathClick("/html/body/div[1]/div[2]/div/div[3]/div/div[2]/div/div[2]/div[2]/div/div[1]/div")
+        print("click Le passeport")
         time.sleep(1)
         self.xpathClick("/html/body/div[1]/div[2]/div/div[3]/div/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/a")
         self.xpathClick("/html/body/div[1]/div[1]/div/div/div/div[3]/button")
