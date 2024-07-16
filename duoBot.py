@@ -1,14 +1,16 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.firefox.options import Options
-import time
+import time, random
 
 class duoBot():
     def __init__(self) -> None:
-        self.options = Options()
-        self.options.set_preference("browser.privatebrowsing.autostart", True)
-        self.browser = webdriver.Firefox(options=self.options)
+        service = Service(executable_path="/Users/danielfussey/Documents/firefoxprofile/geckodriver")
+        options = webdriver.FirefoxOptions()
+        options.add_argument("--width=2560")
+        options.add_argument("--height=1440")
+        self.browser = webdriver.Firefox(service=service, options=options)
         self.cE = {
             "CONTINUER": "/html/body/div[1]/div[1]/div/div/div[3]/div/div/div/button",
             "q1:1": "/html/body/div[1]/div[1]/div/div/div[1]/div[1]/div[5]/div/ul/li[1]/button",
@@ -62,13 +64,18 @@ class duoBot():
                 self.xpathClick(j)
 
     def login(self):
-        self.browser.get("https://www.duolingo.com/practice-hub/stories") # the sole point of this url is to login reliably
-        self.xpathClick('//*[@id="sign-in-btn"]')
+        self.browser.get("https://www.duolingo.com/course/en/fr/Learn-English")
+        time.sleep(5)
+        self.xpathClick("/html/body/div[1]/div[1]/div/div[2]/div[2]/div/div[2]/button")
         usrnme = self.xpathClick('//*[@id="web-ui1"]', click=False)
         pwd = self.xpathClick('//*[@id="web-ui2"]', click=False)
         usrnme.send_keys("dtfussey@icloud.com")
+        time.sleep(10)
         pwd.send_keys("duolingoG0ldf!sh")
-        self.xpathClick("/html/body/div[2]/div[3]/div/div/form/div[1]/button")
+        time.sleep(5)
+        for i in range(1):
+            time.sleep(random.randrange(0,200)/100)
+            self.xpathClick("/html/body/div[2]/div[3]/div/div/form/div[1]/button") 
 
     def changeToFrench(self):
         time.sleep(5)
