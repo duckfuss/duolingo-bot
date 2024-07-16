@@ -52,7 +52,7 @@ class duoBot():
         if click:
             self.browser.execute_script("arguments[0].click();", btn)
         return btn
-    def repContinuers(self, n, t=1):
+    def repContinuers(self, n, t=4):
         for i in range(n):
             time.sleep(t)
             self.xpathClick(self.cE["CONTINUER"])
@@ -90,12 +90,14 @@ class duoBot():
     def changeToChinese(self):
         time.sleep(5)
         self.browser.get("https://www.duolingo.com/courses/en")
-        self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/a[8]")
+        self.xpathClick("/html/body/div[1]/div[2]/div/div[3]/div/div[2]/a[8]")
 
     def startCourse(self):
         self.browser.get("https://www.duolingo.com/practice-hub/stories")
-        self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div[1]/button")
-        self.xpathClick("/html/body/div[1]/div[2]/div/div[2]/div/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/a")
+        time.sleep(10)
+        self.xpathClick("/html/body/div[1]/div[2]/div/div[3]/div/div[2]/a[1]")
+        time.sleep(1)
+        self.xpathClick("/html/body/div[1]/div[2]/div/div[3]/div/div[2]/div/div[2]/div[2]/div/div[1]/div[2]/div/div[1]/a")
         self.xpathClick("/html/body/div[1]/div[1]/div/div/div/div[3]/button")
 
     def quiz(self):
