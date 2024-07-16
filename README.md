@@ -1,9 +1,9 @@
 # Intro
-a simple duolingo bot
+- A simple duolingo bot
 
-the login code is highly dependant on reCAPTCHA failing to identify the bot, so if your IP has a low score, it is unlikely to work 100% of the time
+- The login code is highly dependant on reCAPTCHA failing to identify the bot, so if your IP has a low score, it is unlikely to work 100% of the time
 
-This is an educational project, _**do not use this to violate duolingo TOS**_
+- This is an educational project, _**do not use this to violate duolingo TOS**_
 
 # Usage
 1. install selenium:
