@@ -6,11 +6,10 @@ import time, random
 
 class duoBot():
     def __init__(self) -> None:
-        service = Service(executable_path="/Users/danielfussey/Documents/firefoxprofile/geckodriver")
         options = webdriver.FirefoxOptions()
         options.add_argument("--width=2560")
         options.add_argument("--height=1440")
-        self.browser = webdriver.Firefox(service=service, options=options)
+        self.browser = webdriver.Firefox(options=options)
         self.cE = {
             "CONTINUER": "/html/body/div[1]/div[1]/div/div/div[3]/div/div/div/button",
             "q1:1": "/html/body/div[1]/div[1]/div/div/div[1]/div[1]/div[5]/div/ul/li[1]/button",
